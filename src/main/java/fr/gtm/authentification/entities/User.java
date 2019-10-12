@@ -3,6 +3,7 @@ package fr.gtm.authentification.entities;
 import java.io.Serializable;
 
 import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,12 +15,20 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
-//@Access(AccessType.FIELD)
+@Access(AccessType.FIELD)
 @NamedQueries({
 		@NamedQuery(name = "User.byName",
-					query = "SELECT u.user FROM User u WHERE u.user =:user")
+					query = "SELECT u.user FROM User u WHERE u.user =:user"),
+
+		@NamedQuery(name = "Nom.all",
+					query = "SELECT u.user FROM User u"),
+		
+		@NamedQuery(name = "User.byPassword",
+					query = "SELECT u FROM User u WHERE UPPER(u.password) = :password")
+
+
 })
-public class User implements Serializable {
+public class User {//implements Serializable 
 	@Id
 	@Column(name= "id")
 	private long id;

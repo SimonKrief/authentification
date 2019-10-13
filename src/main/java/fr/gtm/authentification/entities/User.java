@@ -1,13 +1,25 @@
 package fr.gtm.authentification.entities;
 
+import java.util.List;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
 
 
 
@@ -22,8 +34,10 @@ import javax.persistence.Table;
 					query = "SELECT u.user FROM User u"),
 		
 		@NamedQuery(name = "User.byPassword",
-					query = "SELECT u FROM User u WHERE UPPER(u.password) = :password")
-
+					query = "SELECT u FROM User u WHERE UPPER(u.password) = :password"),
+		
+		@NamedQuery(name = "Role.all",
+					query = "SELECT DISTINCT u.role FROM User u")
 
 })
 public class User {
@@ -34,12 +48,42 @@ public class User {
 	private String user;
 	@Column(name= "password")
 	private String password;
-	@Column(name= "role")
+	
+//	@ManyToMany
+//	@JoinColumn(name="role")
+	@Column
 	private String role;
+	
+//	@ElementCollection(fetch=FetchType.EAGER)
+//	@CollectionTable(name="roles",joinColumns=@JoinColumn(name="user"))
+//	@Column(name="role")
+//	private List<String> roles; 
+	
+	
+//	@Embedded
+//	private Role role;
+//	
+//	public Role getRole() {
+//		return role;
+//	}
+//	public void setRole(Role role) {
+//		this.role = role;
+//	}	
+	
+//	public List<String> getRoles() {
+//		return roles;
+//	}
+//	public void setRoles(List<String> role) {
+//		this.roles = role;
+//	}
+	
+	
+	
 	
 	public String getUser() {
 		return user;
 	}
+	
 	public void setUser(String user) {
 		this.user = user;
 	}
@@ -49,12 +93,8 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
-	}
+
+	
 	@Override
 	public String toString() {
 		return "User [user=" + user + "]";

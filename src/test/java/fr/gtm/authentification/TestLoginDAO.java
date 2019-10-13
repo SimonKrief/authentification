@@ -35,5 +35,11 @@ public class TestLoginDAO {
 		LoginDAO dao = new LoginDAO(emf);
 		assertEquals(4, dao.getAllNoms().size());
 	}
+	
+	@Test
+	public void testGetAllRoles() {
+		LoginDAO dao = new LoginDAO(emf);
+		assertEquals(3, dao.getAllRoles().size());
+	}
 
 }

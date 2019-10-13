@@ -13,6 +13,7 @@ public class LoginDAO {
 	public LoginDAO(EntityManagerFactory emf) {
 		this.emf = emf;
 	}
+	
 
 //	public List<String> getUserByName(String name) {
 //		EntityManager em = getEntityManagerFactory().createEntityManager();
@@ -61,6 +62,11 @@ public class LoginDAO {
 		return getListString("Nom.all");
 	}
 
+	public List<String> getAllRoles() {
+		return getListString("Role.all");
+	}
+	
+	
 	private List<String> getListString(String namedQuery) {
 		EntityManager em = getEntityManagerFactory().createEntityManager();
 		List<String> liste = em.createNamedQuery(namedQuery, String.class).getResultList();

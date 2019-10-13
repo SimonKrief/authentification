@@ -1,7 +1,5 @@
 package fr.gtm.authentification.entities;
 
-import java.io.Serializable;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
@@ -28,7 +26,7 @@ import javax.persistence.Table;
 
 
 })
-public class User {//implements Serializable 
+public class User {
 	@Id
 	@Column(name= "id")
 	private long id;
